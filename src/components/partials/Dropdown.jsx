@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Dropdown = ({ title, options ,func }) => {
-
-
+const Dropdown = ({ title, options, func, value }) => {
   return (
     <div className="select">
-      <select defaultValue="0" onChange={func} name="format" id="format">
-        {
+      <select
+        value={value}
+        onChange={func}
+        name="format"
+        id="format"
+      >
+        {value === "" && (
           <option value="" disabled>
             {title}
           </option>
-        }
+        )}
         {options.map((o, i) => (
           <option key={i} value={o}>
-            {` ${o.toUpperCase()}`}
+            {value === o ? `✔ ${o.toUpperCase()}` : o.toUpperCase()}
           </option>
         ))}
       </select>

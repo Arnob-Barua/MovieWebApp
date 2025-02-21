@@ -10,11 +10,11 @@ const Sidenav = () => {
       </h1>
       <nav className="flex flex-col text-zinc-400 text-xl gap-3">
         <h1 className="text-white font-semibold mt-6 mb-3">New Feeds</h1>
-        <Link className="hover:bg-[#6556CD] hover:text-white p-3 rounded-lg duration-300">
+        <Link to="/trending" className="hover:bg-[#6556CD] hover:text-white p-3 rounded-lg duration-300">
           {" "}
           <i className="mr-2 ri-fire-fill"></i> Trending{" "}
         </Link>
-        <Link className="hover:bg-[#6556CD] hover:text-white p-3 rounded-lg duration-300">
+        <Link to="/popular" className="hover:bg-[#6556CD] hover:text-white p-3 rounded-lg duration-300">
           {" "}
           <i className="mr-2 ri-bard-fill"></i> Popular{" "}
         </Link>

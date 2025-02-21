@@ -5,6 +5,7 @@ import axios from "../utils/axios"
 import Header from "./partials/Header"
 import HorizontalCards from "./partials/HorizontalCards"
 import Dropdown from "./partials/Dropdown"
+import Loading from "./Loading"
 
 const Home = () => {
   document.title = "SCSDB | Homepage"
@@ -49,13 +50,18 @@ const Home = () => {
       <div className="flex justify-between p-5">
         <h1 className="text-2xl font-semibold text-zinc-400">Trending</h1>
 
-        <Dropdown title="Filter" options={["tv","movie" , "all"]} func={(e)=> setcategory(e.target.value)} />
+        <Dropdown
+  title="Filter"
+  options={["tv", "movie", "all"]}
+  func={(e) => setcategory(e.target.value)}
+  value={category}
+/>
       </div>
 
       <HorizontalCards data={trending} category_func={setcategory} />
     </div>
     </>
-  ):<h1>Loading.....</h1>
+  ):<Loading />
 }
 
 export default Home
