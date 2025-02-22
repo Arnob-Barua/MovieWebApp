@@ -7,20 +7,20 @@ import Cards from "./partials/Cards";
 import Loading from "./Loading";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const Movies = () => {
+const People = () => {
   const nevigate = useNavigate();
-  const [category, setcategory] = useState("now_playing");
-  const [movie, setmovie] = useState([]);
+  const [category, setcategory] = useState("popular");
+  const [person, setperson] = useState([]);
   const [page, setpage] = useState(1);
   const [hasMore, sethasMore] = useState(true);
-  document.title = "SCSDB | Movie "+ category.toUpperCase();
+  document.title = "SCSDB | People ";
 
-  const GetMovie = async () => {
+  const GetPerson = async () => {
     try {
-      const { data } = await axios.get(`/movie/${category}?page=${page}`);
+      const { data } = await axios.get(`/person/${category}?page=${page}`);
 
       if (data.results.length > 0) {
-        setmovie((prevState) => [...prevState, ...data.results]);
+        setperson((prevState) => [...prevState, ...data.results]);
         setpage(page + 1);
       } else {
         sethasMore(false);
@@ -31,19 +31,19 @@ const Movies = () => {
   };
 
   const refershHandler = async () => {
-    if (movie.length === 0) {
-      GetMovie();
+    if (person.length === 0) {
+      GetPerson();
     } else {
       setpage(1);
-      setmovie([]);
-      GetMovie();
+      setperson([]);
+      GetPerson();
     }
   };
 
   useEffect(() => {
     refershHandler();
   }, [category]);
-  return movie.length > 0 ? (
+  return person.length > 0 ? (
     <div className="w-screen h-sceen">
       <div className="px-[5%] w-full flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-zinc-400">
@@ -53,32 +53,26 @@ const Movies = () => {
             }}
             className="ri-arrow-left-line hover:text-[#6556CD]"
           ></i>
-          Movies{" "}
-          <small className="ml-2 text-sm text-zinc-600">({category})</small>
+          People{" "}
         </h1>
 
         <div className="flex items-center w-[80%]">
           <Topnav />
-          <Dropdown
-            title="Category"
-            options={["popular", "top_rated", "upcoming", "now_playing"]}
-            func={(e) => setcategory(e.target.value)}
-            value={category}
-          />
         </div>
       </div>
 
       <InfiniteScroll
-        dataLength={movie.length}
-        next={GetMovie}
+        dataLength={person.length}
+        next={GetPerson}
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
       >
-        <Cards data={movie} title="movie" />
+        <Cards data={person} title="person" />
       </InfiniteScroll>
     </div>
   ) : (
     <Loading />
   );
 };
-export default Movies;
+
+export default People;
