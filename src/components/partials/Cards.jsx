@@ -14,7 +14,7 @@ const Cards = ({ data, title }) => {
             alt=""
           />
           <h1 className="text-2xl text-zinc-300 mt-3 font-semibold">{c.name || c.title || c.orginal_name || c.orginal_title}</h1>
-          {(c.vote_average &&  <div className="absolute right-[-12%] bottom-[35%] rounded-full text-sm font-semibold bg-yellow-600 text-white w-[5vh] h-[5vh] flex justify-center items-center">{(c.vote_average * 10).toFixed()} <sup>%</sup> </div> )}
+          {/* {(c.vote_average &&  <div className="absolute right-[-12%] bottom-[35%] rounded-full text-sm font-semibold bg-yellow-600 text-white w-[5vh] h-[5vh] flex justify-center items-center">{(c.vote_average * 10).toFixed()} <sup>%</sup> </div> )} */}
         </Link>
       ))}
     </div>
