@@ -26,7 +26,7 @@ const Header = ({ data }) => {
         <i className="text-yellow-500 ri-megaphone-fill">{data.release_date  || " Comming Soon"}</i>
         <i className="ml-3 text-yellow-500 ri-album-fill">{data.media_type.toUpperCase()}</i>
       </p>
-      <Link className="bg-[#6556CD] p-2 rounded-md text-white font-semibold">Watch Trailer</Link>
+      <Link to={`/${data.media_type}/details/${data.id}/trailer`} className="bg-[#6556CD] p-2 rounded-md text-white font-semibold">Watch Trailer</Link>
     </div>
   );
 };

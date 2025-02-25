@@ -13,6 +13,7 @@ const MoviesDetails = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+
     dispatch(asyncloadmovie(id));
     return () => {
       dispatch(removemovie());
