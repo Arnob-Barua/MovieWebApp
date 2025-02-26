@@ -1,10 +1,13 @@
+// Importing necessary libraries and components
 import React from "react";
 import { Link } from "react-router-dom";
 import noimage from "/no_image.png";
 
+// Main Cards component
 const Cards = ({ data, title }) => {
   return (
     <div className="flex flex-wrap w-full h-full px-[5%] bg-[#1F1E24]">
+      {/* Mapping data to cards */}
       {data.map((c, i) => (
         <Link
           to={`/${c.media_type || title}/details/${c.id}`}
@@ -12,6 +15,7 @@ const Cards = ({ data, title }) => {
           className="relative w-[25vh] mr-[5%] mb-[5%] transform transition-transform duration-300 hover:scale-105"
         >
           <div className="relative">
+            {/* Card image */}
             <img
               className="shadow-lg rounded-lg h-[40vh] object-cover"
               src={
@@ -23,12 +27,14 @@ const Cards = ({ data, title }) => {
               }
               alt={c.name || c.title || c.original_name || c.original_title}
             />
+            {/* Vote average badge */}
             {c.vote_average && (
               <div className="absolute top-2 right-2 bg-yellow-600 text-white text-sm font-semibold rounded-full w-10 h-10 flex items-center justify-center">
                 {(c.vote_average * 10).toFixed()}%
               </div>
             )}
           </div>
+          {/* Card title */}
           <h1 className="text-xl text-zinc-300 mt-3 font-semibold truncate">
             {c.name || c.title || c.original_name || c.original_title}
           </h1>

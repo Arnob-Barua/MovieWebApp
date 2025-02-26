@@ -1,24 +1,30 @@
+// Importing necessary libraries and components
 import { createSlice } from "@reduxjs/toolkit";
 
+// Initial state for the TV slice
 const initialState = {
-    info:null,
+    info: null,
 };
 
-
+// Creating the TV slice
 export const tvSlice = createSlice({
-    name:"tv",
+    name: "tv",
     initialState,
-    reducers:{
-        loadtv:(state,action) => {
+    reducers: {
+        // Reducer to load TV show details
+        loadtv: (state, action) => {
             state.info = action.payload;
         },
 
-        removetv:(state) => {
+        // Reducer to remove TV show details
+        removetv: (state) => {
             state.info = null;
         }
     },
 });
 
-export const {loadtv,removetv} = tvSlice.actions;
+// Exporting the actions from the TV slice
+export const { loadtv, removetv } = tvSlice.actions;
 
+// Exporting the TV slice reducer
 export default tvSlice.reducer;

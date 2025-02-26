@@ -1,5 +1,12 @@
+/* Importing Tailwind CSS */
 @import "tailwindcss";
 
+/* Setting the background color for the body */
+body {
+  background-color: #1F1E24;
+}
+
+/* Customizing the scrollbar */
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
@@ -20,6 +27,7 @@
     background: #6556CD;
 }
 
+/* Styling the custom select dropdown */
 .select {
   position: relative;
   display: inline-block;
@@ -40,6 +48,7 @@
   -moz-appearance: none;
 }
 
+/* Adding a down arrow to the custom select dropdown */
 .select::after {
   content: '\25BC'; /* Down arrow */
   position: absolute;
@@ -55,11 +64,13 @@
   color: #6556CD;
 }
 
+/* Styling the custom select dropdown on focus */
 .select select:focus {
   border-color: #6556CD;
   outline: none;
 }
 
+/* Styling the options in the custom select dropdown */
 .select select option {
   background-color: #1F1E24;
   color: #fff;

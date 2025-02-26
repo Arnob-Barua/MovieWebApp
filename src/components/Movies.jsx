@@ -1,3 +1,4 @@
+// Importing necessary libraries and components
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Topnav from "./partials/Topnav";
@@ -7,14 +8,22 @@ import Cards from "./partials/Cards";
 import Loading from "./Loading";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+// Main Movies component
 const Movies = () => {
-  const nevigate = useNavigate();
+  // Navigation hook
+  const navigate = useNavigate();
+
+  // State variables
   const [category, setcategory] = useState("now_playing");
   const [movie, setmovie] = useState([]);
   const [page, setpage] = useState(1);
   const [hasMore, sethasMore] = useState(true);
-  document.title = "SCSDB | Movie "+ category.toUpperCase();
+  const [showScroll, setShowScroll] = useState(false);
 
+  // Set document title
+  document.title = "TMDB | Movie " + category.toUpperCase();
+
+  // Function to get movies data
   const GetMovie = async () => {
     try {
       const { data } = await axios.get(`/movie/${category}?page=${page}`);
@@ -30,6 +39,7 @@ const Movies = () => {
     }
   };
 
+  // Function to refresh movies data
   const refershHandler = async () => {
     if (movie.length === 0) {
       GetMovie();
@@ -40,16 +50,41 @@ const Movies = () => {
     }
   };
 
+  // useEffect hook to fetch data on category change
   useEffect(() => {
     refershHandler();
   }, [category]);
+
+  // Function to check scroll position
+  const checkScrollTop = () => {
+    if (!showScroll && window.pageYOffset > 400) {
+      setShowScroll(true);
+    } else if (showScroll && window.pageYOffset <= 400) {
+      setShowScroll(false);
+    }
+  };
+
+  // Function to scroll to top
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // useEffect hook to add scroll event listener
+  useEffect(() => {
+    window.addEventListener("scroll", checkScrollTop);
+    return () => {
+      window.removeEventListener("scroll", checkScrollTop);
+    };
+  }, [showScroll]);
+
+  // Render the component
   return movie.length > 0 ? (
-    <div className="w-screen h-sceen">
+    <div className="w-screen h-screen">
       <div className="px-[5%] w-full flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-zinc-400">
           <i
             onClick={() => {
-              nevigate(-1);
+              navigate(-1);
             }}
             className="ri-arrow-left-line hover:text-[#6556CD]"
           ></i>
@@ -76,9 +111,19 @@ const Movies = () => {
       >
         <Cards data={movie} title="movie" />
       </InfiniteScroll>
+      
+      <button
+        onClick={scrollTop}
+        className={`fixed bottom-10 right-10 p-3 bg-[#6556CD] hover:bg-[#5346bd] transition-colors text-white rounded-full shadow-lg transition-opacity duration-300 ${
+          showScroll ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <i className="ri-arrow-up-line text-2xl"></i>
+      </button>
     </div>
   ) : (
     <Loading />
   );
 };
+
 export default Movies;

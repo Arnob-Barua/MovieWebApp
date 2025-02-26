@@ -1,24 +1,30 @@
+// Importing necessary libraries and components
 import { createSlice } from "@reduxjs/toolkit";
 
+// Initial state for the movie slice
 const initialState = {
-    info:null,
+    info: null,
 };
 
-
+// Creating the movie slice
 export const movieSlice = createSlice({
-    name:"movie",
+    name: "movie",
     initialState,
-    reducers:{
-        loadmovie:(state,action) => {
+    reducers: {
+        // Reducer to load movie details
+        loadmovie: (state, action) => {
             state.info = action.payload;
         },
 
-        removemovie:(state) => {
+        // Reducer to remove movie details
+        removemovie: (state) => {
             state.info = null;
         }
     },
 });
 
-export const {loadmovie,removemovie} = movieSlice.actions;
+// Exporting the actions from the movie slice
+export const { loadmovie, removemovie } = movieSlice.actions;
 
+// Exporting the movie slice reducer
 export default movieSlice.reducer;
